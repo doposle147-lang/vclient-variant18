@@ -1,3 +1,7 @@
 *.o
 *.d
 /vclient
+unit_tests
+tests/*.o
+tests/*.d
+test_tmp_*
