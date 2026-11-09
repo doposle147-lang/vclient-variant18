@@ -24,15 +24,19 @@ private:
     po::options_description desc;  // описание параметров командной строки
     ProgramOptions options;        // полученные параметры
 
-    // Разобрать параметры командной строки
-    // Если параметров нет или указан -h, в результате help = true.
-    // исключение: InterfaceError при неверных параметрах
-    ProgramOptions parseCommandLine(int argc, const char** argv);
-
     // Вывести справку
     void printHelp();
 public:
     UserInterface();
+
+    // Разобрать параметры командной строки
+    // Если параметров нет или указан -h, в результате help = true.
+    // исключение: InterfaceError при неверных параметрах
+    // (метод публичный, чтобы его можно было проверить модульными тестами)
+    ProgramOptions parseCommandLine(int argc, const char** argv);
+
+    // Текст справки (используется в printHelp и в модульных тестах)
+    std::string getHelpText() const;
 
     // Выполнить программу
     int run(int argc, const char** argv);

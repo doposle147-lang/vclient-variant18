@@ -6,6 +6,7 @@
 #include "errors.h"
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 
 // значения параметров по умолчанию
 static const char* DEFAULT_PORT = "33333";
@@ -100,11 +101,18 @@ ProgramOptions UserInterface::parseCommandLine(int argc, const char** argv)
     return opt;
 }
 
+std::string UserInterface::getHelpText() const
+{
+    std::ostringstream text;
+    text << "Использование: vclient -a АДРЕС -i ВХОДНОЙ_ФАЙЛ -o ВЫХОДНОЙ_ФАЙЛ "
+         << "[-p ПОРТ] [-c КОНФИГ]\n\n";
+    text << desc;
+    return text.str();
+}
+
 void UserInterface::printHelp()
 {
-    std::cout << "Использование: vclient -a АДРЕС -i ВХОДНОЙ_ФАЙЛ -o ВЫХОДНОЙ_ФАЙЛ "
-              << "[-p ПОРТ] [-c КОНФИГ]\n\n";
-    std::cout << desc << std::endl;
+    std::cout << getHelpText() << std::endl;
 }
 
 int UserInterface::run(int argc, const char** argv)
