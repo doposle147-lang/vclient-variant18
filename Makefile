@@ -19,6 +19,11 @@ unit_tests: $(TEST_OBJS)
 test: unit_tests
 	./unit_tests
 
+# функциональное тестирование с тестовым сервером
+# (путь к серверу по умолчанию ~/timp/server/server)
+functional_test: vclient
+	bash tests/functional_tests.sh $(SERVER)
+
 tests/unit_tests.o: tests/unit_tests.cpp
 	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -I. -c $< -o $@
 
@@ -28,6 +33,6 @@ tests/unit_tests.o: tests/unit_tests.cpp
 clean:
 	rm -f *.o *.d tests/*.o tests/*.d vclient unit_tests
 
-.PHONY: clean test
+.PHONY: clean test functional_test
 
 -include $(OBJS:.o=.d) tests/unit_tests.d

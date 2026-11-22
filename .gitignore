@@ -5,3 +5,4 @@ unit_tests
 tests/*.o
 tests/*.d
 test_tmp_*
+functional_tests.log
